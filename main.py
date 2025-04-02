@@ -1,22 +1,30 @@
-import glob
 import streamlit as st
 import plotly.express as px
 import time
 import nltk
 
-# Download the VADER lexicon if it's not already available
+# Ensure the VADER lexicon is available
 try:
     nltk.data.find('sentiment/vader_lexicon')
 except LookupError:
     nltk.download('vader_lexicon')
 
-# Now you can initialize the SentimentIntensityAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
-
 
 # Initialize sentiment analyzer
 analyzer = SentimentIntensityAnalyzer()
+
+# 🔹 Force HTTPS Redirect (Prevents Chrome Issues)
+st.markdown(
+    """
+    <script>
+        if (window.location.protocol !== "https:") {
+            window.location.href = "https://" + window.location.hostname + window.location.pathname + window.location.search;
+        }
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
 # Streamlit title and entry section
 st.title("Diary Tone")
@@ -46,7 +54,7 @@ if st.button("Analyze Sentiment"):
         negativity.append(sentiment['neg'])
         dates.append(time.strftime("%Y-%m-%d_%H-%M-%S"))
     else:
-        st.write("Please write something in your diary entry.")
+        st.warning("Please write something in your diary entry.")
 
 # Display graphs of positivity and negativity over time
 if dates:
