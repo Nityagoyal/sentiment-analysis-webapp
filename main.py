@@ -1,8 +1,19 @@
 import glob
 import streamlit as st
 import plotly.express as px
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import time
+import nltk
+
+# Download the VADER lexicon if it's not already available
+try:
+    nltk.data.find('sentiment/vader_lexicon')
+except LookupError:
+    nltk.download('vader_lexicon')
+
+# Now you can initialize the SentimentIntensityAnalyzer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+
 
 # Initialize sentiment analyzer
 analyzer = SentimentIntensityAnalyzer()
