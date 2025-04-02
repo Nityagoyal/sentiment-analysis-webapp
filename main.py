@@ -12,6 +12,9 @@ analyzer = SentimentIntensityAnalyzer()
 if not os.path.exists("diary"):
     os.mkdir("diary")
 
+# Streamlit title and entry section
+st.title("Diary Tone")
+
 # Load the existing diary entries
 filepaths = sorted(glob.glob("diary/*.txt"))
 
@@ -29,9 +32,6 @@ for filepath in filepaths:
 
 # Getting the dates from the file names
 dates = [name.strip("diary/").strip(".txt") for name in filepaths]
-
-# Streamlit title and entry section
-st.title("Diary Tone")
 
 # Create a text input box for the user to write their diary entry
 diary_entry = st.text_area("Write your diary entry here:")
