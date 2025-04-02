@@ -2,6 +2,12 @@ import streamlit as st
 import plotly.express as px
 import time
 import nltk
+import streamlit as st
+import ssl
+
+if not st.runtime.exists():
+    import os
+    os.environ['HTTPS'] = 'on'
 
 # Ensure the VADER lexicon is available
 try:
